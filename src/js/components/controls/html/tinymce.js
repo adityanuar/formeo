@@ -2,11 +2,10 @@ import Control from '../control'
 
 class TinyMCEControl extends Control {
   constructor() {
-    const textAreaConfig = {
+    const tinymceConfig = {
       tag: 'textarea',
       config: {
         label: 'WYSIWYG',
-        editableContent: true,
       },
       meta: {
         group: 'html',
@@ -29,7 +28,7 @@ class TinyMCEControl extends Control {
         },
       },
     }
-    super(textAreaConfig)
+    super(tinymceConfig)
   }
 }
 

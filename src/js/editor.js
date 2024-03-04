@@ -22,30 +22,37 @@ export class FormeoEditor {
    * @return {Object}          formeo references and actions
    */
   constructor({ formData, ...options }, userFormData) {
-    const _this = this
-    const mergedOptions = merge(defaults.editor, options)
+    const script = document.createElement('script')
+    script.id = 'tinymce-js-script'
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js'
+    document.head.appendChild(script)
+    var jsScript = document.querySelector('#tinymce-js-script')
+    jsScript.addEventListener('load', () => {
+      const _this = this
+      const mergedOptions = merge(defaults.editor, options)
 
-    const { actions, events, debug, config, editorContainer, ...opts } = mergedOptions
-    if (editorContainer) {
-      this.editorContainer =
-        typeof editorContainer === 'string' ? document.querySelector(editorContainer) : editorContainer
-    }
-    this.opts = opts
-    dom.setOptions = opts
-    Components.config = config
-
-    this.userFormData = userFormData || formData
-
-    this.Components = Components
-    Events.init({ debug, ...events })
-    Actions.init({ debug, sessionStorage: opts.sessionStorage, ...actions })
-
-    // Load remote resources such as css and svg sprite
-    _this.loadResources().then(() => {
-      if (opts.allowEdit) {
-        _this.edit = _this.init.bind(_this)
-        _this.init()
+      const { actions, events, debug, config, editorContainer, ...opts } = mergedOptions
+      if (editorContainer) {
+        this.editorContainer =
+          typeof editorContainer === 'string' ? document.querySelector(editorContainer) : editorContainer
       }
+      this.opts = opts
+      dom.setOptions = opts
+      Components.config = config
+
+      this.userFormData = userFormData || formData
+
+      this.Components = Components
+      Events.init({ debug, ...events })
+      Actions.init({ debug, sessionStorage: opts.sessionStorage, ...actions })
+
+      // Load remote resources such as css and svg sprite
+      _this.loadResources().then(() => {
+        if (opts.allowEdit) {
+          _this.edit = _this.init.bind(_this)
+          _this.init()
+        }
+      })
     })
   }
 
@@ -119,11 +126,6 @@ export class FormeoEditor {
    * @return {void}
    */
   render() {
-    const script = document.createElement('script')
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js'
-
-    document.head.appendChild(script)
-
     this.stages = Object.values(Components.get('stages'))
     if (this.opts.controlOnLeft) {
       this.stages.forEach(stage => {

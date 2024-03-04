@@ -228,6 +228,15 @@ export default class Field extends Component {
       this.resizePanelWrap = this.panels.nav.refresh
       fieldEdit.action = {
         onRender: () => {
+          if (this.data.meta.id === 'tinymce') {
+            const onRenderTimeout = setTimeout(() => {
+              window.tinymce.remove('textarea#prev-' + this.data.id)
+              window.tinymce.init({
+                selector: 'textarea#prev-' + this.data.id,
+              })
+              clearTimeout(onRenderTimeout)
+            }, 333)
+          }
           this.resizePanelWrap()
           if (!editPanelLength) {
             const field = this.dom
