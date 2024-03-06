@@ -130,6 +130,7 @@ export class FormeoEditor {
     if (this.opts.controlOnLeft) {
       this.stages.forEach(stage => {
         stage.dom.style.order = 1
+        stage.dom.style.marginLeft = '10px'
       })
     }
     const elemConfig = {
