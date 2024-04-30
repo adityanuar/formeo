@@ -89,11 +89,19 @@
   width: 100%;
   padding: $input-padding;
   box-sizing: border-box;
+  -webkit-appearance: auto !important;
 
   &:focus {
     border: 1px solid $input-focus;
     outline: none;
   }
+}
+
+input[type=checkbox]:checked::before {
+  content: none !important;
+  margin: auto !important;
+  height: auto !important;
+  width: auto !important;
 }
 
 %no-list-style {
