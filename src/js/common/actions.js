@@ -12,14 +12,14 @@ import events from './events'
 const defaultActions = {
   add: {
     attr: evt => {
-      const attr = window.prompt(evt.message.attr)
+      const attr = window.prompt(evt.message.attr).toLowerCase()
       if (attr && evt.isDisabled(attr)) {
         window.alert(i18n.get('attributeNotPermitted', attr || ''))
         return actions.add.attrs(evt)
       }
       let val
       if (attr) {
-        val = String(window.prompt(evt.message.value, ''))
+        val = String(window.prompt(evt.message.value, '').toLowerCase())
         evt.addAction(attr, val)
       }
     },
