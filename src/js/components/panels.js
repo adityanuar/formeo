@@ -109,6 +109,20 @@ export default class Panels {
 
     return h.forEach(groups, (group, index) => {
       group.fieldId = _this.opts.id
+      if (group.editGroup === 'options') {
+        const div = document.createElement('div')
+        const label = document.createElement('label')
+        label.textContent = 'Label'
+        label.style = 'font-weight: bold;'
+        const value = document.createElement('label')
+        value.textContent = 'Value'
+        value.style = 'font-weight: bold;'
+        div.appendChild(label)
+        div.appendChild(value)
+        div.style.display = 'flex'
+        div.style.justifyContent = 'space-around'
+        group.insertBefore(div, group.firstChild)
+      }
       if (group.isSortable) {
         Sortable.create(group, {
           animation: 150,
