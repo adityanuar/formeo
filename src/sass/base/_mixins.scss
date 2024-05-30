@@ -97,7 +97,7 @@
   }
 }
 
-input[type=checkbox]:checked::before {
+.formeo-column input[type=checkbox]:checked::before {
   content: none !important;
   margin: auto !important;
   height: auto !important;
