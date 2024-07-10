@@ -87,6 +87,8 @@
   border-radius: $input-border-radius;
   background-color: $white;
   width: 100%;
+  max-width: 100%;
+  background-image: none;
   padding: $input-padding;
   box-sizing: border-box;
   -webkit-appearance: auto !important;
